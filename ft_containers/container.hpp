@@ -10,15 +10,19 @@ namespace ft{
     template <typename T, class Alloc = std::allocator<T> >
     class vector{
         public:
-        typedef Alloc allocator_type;
-        typedef T value_type;
-        typedef T* pointer;
-        typedef const T* const_pointer;
-        typedef size_t size_type;
+        typedef Alloc                           allocator_type;
+        typedef T                               value_type;
+        typedef T*                              pointer;
+        typedef const T*                        const_pointer;
+        typedef size_t                          size_type;
+        typedef typename Alloc::reference       reference;
+        typedef typename Alloc::const_reference const_reference;
+        typedef typename ft::iterator<input_iterator_tag, T>  my_iterator; 
+
         
         explicit 
         vector (const allocator_type& alloc = allocator_type())
-        : _alloc(alloc), _capacity(0)
+        : _alloc(alloc), _capacity(0), _size(0)
         {}
         
         explicit 
@@ -47,14 +51,14 @@ namespace ft{
             _vector = _alloc.allocate(_capacity); 
             first++;
             for(size_t i = 0; i < _size; i++){
-                _alloc.construct(&_vector[i], *first); //?????
+                _alloc.construct(&_vector[i], *first); 
                 first++;
              }
         }
 
 
 
-        size_type size() { return _size;} //const?????
+        size_type size() { return _size;} 
 
         
         private:
