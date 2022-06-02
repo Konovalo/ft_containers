@@ -3,34 +3,9 @@
 
 #include<alloca.h>
 #include<iostream>
+#include"iterator.hpp"
 
 namespace ft{
-    
-    template <typename T>
-    class InputIterator {
-        public:
-            typedef T value_type;
-            typedef T* pointer;
-            typedef T& reference;
-            //typedef difference_type ptrdiff_t;
-       
-        InputIterator (pointer val)
-        : _val(val)
-        {}
-       reference operator*(pointer val) {return *_val;}
-
-       InputIterator& operator++() {++_val;return *this;}
-       
-       InputIterator operator++(value_type) {
-           InputIterator tmp(*this);
-           operator++();
-           return tmp;
-           }
-        bool operator!=(const InputIterator& rhs) const {return _val!=rhs._val;}
-        reference operator*() {return *_val;}
-        private:
-            pointer _val;
-    };
 
     template <typename T, class Alloc = std::allocator<T> >
     class vector{
@@ -58,24 +33,24 @@ namespace ft{
             }
         }
 
- /*       template <class InputIterator>
+      template <class InputIterator>
          vector (InputIterator first, InputIterator last,
                  const allocator_type& alloc = allocator_type())
-        : _alloc(alloc), _size(0), _capacity(0)
+        : _alloc(alloc), _size(0)
         {
-            InputIterator begin(first);
-            while (begin != last){
+            InputIterator tmp(first);
+            while (tmp != last){
                 _size++;
-                begin++;
+                tmp++;
             }
             _capacity = _size;
-             _vector = _alloc.allocate(_capacity); 
-             first++;
-             for(size_t i = 0; i < _size; i++){
+            _vector = _alloc.allocate(_capacity); 
+            first++;
+            for(size_t i = 0; i < _size; i++){
                 _alloc.construct(&_vector[i], *first); //?????
                 first++;
              }
-        }*/
+        }
 
 
 
